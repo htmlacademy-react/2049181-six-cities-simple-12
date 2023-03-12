@@ -1,4 +1,5 @@
 import './not-found-page.css';
+import { Link } from 'react-router-dom';
 
 function NotFoundPage(): JSX.Element {
   return (
@@ -6,7 +7,7 @@ function NotFoundPage(): JSX.Element {
       <div className="fof">
         <h1>Error 404</h1>
         <div className='message'>Page not found because it was never there</div>
-        <a href='/' className="button">Go to home page</a>
+        <Link to="/" className="button">Go to home page</Link>
       </div>
     </div>
   );
