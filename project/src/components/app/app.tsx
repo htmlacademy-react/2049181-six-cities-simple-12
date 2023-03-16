@@ -4,13 +4,17 @@ import { AppRoute } from '../../const';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoginPage from '../../pages/login-page/login-page';
 import MainPage from '../../pages/main-page/main-page';
-import RoomPage from '../../pages/room-page/room-page';
+import RoomPage from '../../pages/offer-page/offer-page';
+import { Offer } from '../../types/offer';
+import { Comment } from '../../types/comment';
 
 type AppProps = {
   cardsCount: number;
+  offers: Offer[];
+  comments: Comment[];
 }
 
-function App({cardsCount}: AppProps): JSX.Element {
+function App({cardsCount, offers, comments}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -25,7 +29,12 @@ function App({cardsCount}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Room}
-            element={<RoomPage/>}
+            element={
+              <RoomPage
+                offers={offers}
+                comments={comments}
+              />
+            }
           />
           <Route
             path="*"

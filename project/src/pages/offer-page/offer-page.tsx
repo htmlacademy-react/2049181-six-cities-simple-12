@@ -1,7 +1,14 @@
 import Logo from '../../components/logo/logo';
 import { Helmet } from 'react-helmet-async';
+import { Offer } from '../../types/offer';
+import { Comment } from '../../types/comment';
 
-function RoomPage(): JSX.Element {
+type OfferPageProps = {
+  offers: Offer[];
+  comments: Comment[];
+}
+
+function RoomPage({offers, comments}: OfferPageProps): JSX.Element {
   return (
     <div className="page">
       <div style={{display: 'none'}}>
