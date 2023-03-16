@@ -5,7 +5,7 @@ export type User ={
   name: string;
 };
 
-export type Comment = {
+export type Review = {
   comment: string;
   date: Date;
   id: number;

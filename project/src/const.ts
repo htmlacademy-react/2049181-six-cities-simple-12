@@ -1,3 +1,5 @@
+export const MAX_OFFER_GALLERY_IMAGES = 6;
+
 export enum AppRoute {
   Root = '/',
   Main = '/main',
