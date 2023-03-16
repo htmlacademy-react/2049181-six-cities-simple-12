@@ -5,12 +5,13 @@ import Mark from '../offer/mark/mark';
 
 type OfferCardProps = {
   offer: Offer;
+  setActiveOfferId: (id: number) => void;
 }
 
-function OfferCard({offer: {isPremium, previewImage, type, price, rating, title, }}: OfferCardProps): JSX.Element {
+function OfferCard({offer: {isPremium, previewImage, type, price, rating, title, id }, setActiveOfferId}: OfferCardProps): JSX.Element {
 
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseEnter={() => setActiveOfferId(id)} onMouseLeave={() => setActiveOfferId(-1)}>
       {isPremium && <Mark classType={ClassType.OfferCard}/>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="/">
