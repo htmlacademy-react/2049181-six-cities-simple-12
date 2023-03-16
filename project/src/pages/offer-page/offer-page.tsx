@@ -9,7 +9,7 @@ import Rating from '../../components/offer/rating/rating';
 import Features from '../../components/offer/features/features';
 import Price from '../../components/offer/price/price';
 import Goods from '../../components/offer/goods/goods';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import Host from '../../components/offer/host/host';
 import Reviews from '../../components/offer/reviews/reviews';
 import { ClassType } from '../../const';
@@ -20,10 +20,13 @@ type OfferPageProps = {
 }
 
 function OfferPage({offers, reviews}: OfferPageProps): JSX.Element {
-  const offer = offers[2];
+  const {id} = useParams() as {id: string};
+  const offer = offers.find((o) => o.id === parseInt(id, 10));
+
   if (!offer) {
     return <Navigate to="*"/>;
   }
+
   const {
     city:{name},
     images,
