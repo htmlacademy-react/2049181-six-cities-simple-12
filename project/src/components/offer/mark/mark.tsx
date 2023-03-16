@@ -1,7 +1,11 @@
-function Mark(): JSX.Element {
+type MarkProps = {
+  classType: string;
+}
+
+function Mark({classType}: MarkProps): JSX.Element {
 
   return (
-    <div className="property__mark">
+    <div className={`${classType}__mark`}>
       <span>Premium</span>
     </div>
   );

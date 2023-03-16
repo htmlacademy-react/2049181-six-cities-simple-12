@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 
 function NotFoundPage(): JSX.Element {
   return (
-    <div id="main">
+    <div id="nfp">
 
       <Helmet>
         <title>Six Cities: page not found</title>
@@ -12,8 +12,8 @@ function NotFoundPage(): JSX.Element {
 
       <div className="fof">
         <h1>Error 404</h1>
-        <div className='message'>Page not found because it was never there</div>
-        <Link to="/" className="button">Go to home page</Link>
+        <div className='message_404'>Page not found because it was never there</div>
+        <Link to="/" className="button_404">Go to home page</Link>
       </div>
     </div>
   );

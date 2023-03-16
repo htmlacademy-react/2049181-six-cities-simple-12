@@ -12,6 +12,7 @@ import Goods from '../../components/offer/goods/goods';
 import { Navigate } from 'react-router-dom';
 import Host from '../../components/offer/host/host';
 import Reviews from '../../components/offer/reviews/reviews';
+import { ClassType } from '../../const';
 
 type OfferPageProps = {
   offers: Offer[];
@@ -79,7 +80,7 @@ function OfferPage({offers, reviews}: OfferPageProps): JSX.Element {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer.isPremium && <Mark/>}
+              {offer.isPremium && <Mark classType={ClassType.OfferPage}/>}
               <Name title={title}/>
               <Rating rating={rating}/>
               <Features type={type} bedrooms={bedrooms} maxAdults={maxAdults}/>

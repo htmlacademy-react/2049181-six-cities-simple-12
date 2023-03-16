@@ -22,7 +22,9 @@ function App({cardsCount, offers, reviews}: AppProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainPage cardsCount={cardsCount}/>}
+            element={
+              <MainPage offers={offers}/>
+            }
           />
           <Route
             path={AppRoute.Login}

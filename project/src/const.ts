@@ -8,3 +8,8 @@ export enum AppRoute {
   DevMainEmpty = 'dev-main-empty',
   DevPropertyNotLogged = 'dev-room-not-logged'
 }
+
+export enum ClassType {
+  OfferPage = 'property',
+  OfferCard = 'place-card'
+}
