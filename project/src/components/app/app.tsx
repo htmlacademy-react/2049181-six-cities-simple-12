@@ -1,25 +1,30 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute } from '../../const';
-import RoomNotLoggedPage from '../../pages/room-not-logged-page/room-not-logged-page';
-import MainEmptyPage from '../../pages/main-empty-page/main-empty-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoginPage from '../../pages/login-page/login-page';
 import MainPage from '../../pages/main-page/main-page';
-import RoomPage from '../../pages/room-page/room-page';
+import OfferPage from '../../pages/offer-page/offer-page';
+import { Offer } from '../../types/offer';
+import { Review } from '../../types/review';
 
 type AppProps = {
   cardsCount: number;
+  offers: Offer[];
+  reviews: Review[];
 }
 
-function App({cardsCount}: AppProps): JSX.Element {
+function App({cardsCount, offers, reviews}: AppProps): JSX.Element {
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainPage cardsCount={cardsCount}/>}
+            element={
+              <MainPage offers={offers}/>
+            }
           />
           <Route
             path={AppRoute.Login}
@@ -27,15 +32,12 @@ function App({cardsCount}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Room}
-            element={<RoomPage/>}
-          />
-          <Route
-            path={AppRoute.DevMainEmpty}
-            element={<MainEmptyPage />}
-          />
-          <Route
-            path={AppRoute.DevPropertyNotLogged}
-            element={<RoomNotLoggedPage />}
+            element={
+              <OfferPage
+                offers={offers}
+                reviews={reviews}
+              />
+            }
           />
           <Route
             path="*"

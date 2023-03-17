@@ -1,12 +1,14 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
-import PlaceCard from '../../components/place-card/place-card';
+import OffersList from '../../components/offers-list/offers-list';
+import { Offer } from '../../types/offer';
 
 type MainPageProps = {
-  cardsCount: number;
+  offers: Offer[];
 }
 
-function MainPage({cardsCount}: MainPageProps): JSX.Element {
+function MainPage({offers}: MainPageProps): JSX.Element {
+
   return (
     <div className="page page--gray page--main">
       <div style={{display: 'none'}}>
@@ -84,7 +86,7 @@ function MainPage({cardsCount}: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cardsCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -100,9 +102,7 @@ function MainPage({cardsCount}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {Array.from({length:cardsCount}, (_, i) => <PlaceCard key={i} />)}
-              </div>
+              <OffersList offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
