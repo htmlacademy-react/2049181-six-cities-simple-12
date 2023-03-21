@@ -24,7 +24,6 @@ function useMap(mapRef: React.RefObject<HTMLElement | null>, location: Location)
       );
 
       instance.addLayer(layer);
-
       setMap(instance);
       isRenderedRef.current = true;
     }

@@ -5,9 +5,9 @@ export const offers: Offer[] = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 52.377956,
-        longitude: 4.897070,
-        zoom: 13
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 12
       }
     },
     previewImage: 'https://12.react.pages.academy/static/hotel/3.jpg',
@@ -55,9 +55,9 @@ export const offers: Offer[] = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 52.377956,
-        longitude: 4.897070,
-        zoom: 13
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 12
       }
     },
     previewImage: 'https://12.react.pages.academy/static/hotel/18.jpg',
@@ -114,9 +114,9 @@ export const offers: Offer[] = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 52.377956,
-        longitude: 4.897070,
-        zoom: 13
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 12
       }
     },
     previewImage: 'https://12.react.pages.academy/static/hotel/12.jpg',
@@ -172,9 +172,9 @@ export const offers: Offer[] = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 52.377956,
-        longitude: 4.897070,
-        zoom: 13
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 12
       }
     },
     previewImage: 'https://12.react.pages.academy/static/hotel/19.jpg',
