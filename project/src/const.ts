@@ -13,3 +13,12 @@ export enum ClassType {
   OfferPage = 'property',
   OfferCard = 'place-card'
 }
+
+export enum City {
+  Paris = 'Paris',
+  Cologne = 'Cologne',
+  Brussels = 'Brussels',
+  Amsterdam = 'Amsterdam',
+  Hamburg = 'Hamburg',
+  Dusseldorf = 'Dusseldorf'
+}
