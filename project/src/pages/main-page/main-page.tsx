@@ -9,15 +9,7 @@ type MainPageProps = {
 }
 
 function MainPage({offers}: MainPageProps): JSX.Element {
-  const getPointsByCity = (city: string) => {
-    const pointsByCity: Offer[] = [];
-    offers.forEach((offer) => {
-      if (offer.city.name === city) {
-        pointsByCity.push(offer);
-      }
-    });
-    return pointsByCity;
-  };
+  const getPointsByCity = (city: string) => offers.filter((offer) => offer.city.name === city);
 
   return (
     <div className="page page--gray page--main">
