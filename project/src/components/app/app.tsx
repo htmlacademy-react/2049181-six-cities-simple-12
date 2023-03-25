@@ -9,12 +9,11 @@ import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
 
 type AppProps = {
-  cardsCount: number;
   offers: Offer[];
   reviews: Review[];
 }
 
-function App({cardsCount, offers, reviews}: AppProps): JSX.Element {
+function App({offers, reviews}: AppProps): JSX.Element {
 
   return (
     <HelmetProvider>

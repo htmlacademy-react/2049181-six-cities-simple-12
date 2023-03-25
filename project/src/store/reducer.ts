@@ -13,7 +13,7 @@ const initialState: InitialState = {
   city: City.Paris
 };
 
-const reducer = createReducer(initialState, (builder) => {
+export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(getAllOffers, (state) => {
       state.allOffers = offers;
@@ -22,5 +22,3 @@ const reducer = createReducer(initialState, (builder) => {
       state.city = action.payload;
     });
 });
-
-export {reducer};
