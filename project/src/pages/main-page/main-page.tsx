@@ -1,9 +1,10 @@
 import { Helmet } from 'react-helmet-async';
+import { useParams, useMatch, generatePath, Navigate} from 'react-router-dom';
 import CitiesTabs from '../../components/cities-tabs/cities-tabs';
 import Logo from '../../components/logo/logo';
 import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
-import { City } from '../../const';
+import { AppRoute, City, DEFAULT_CITY } from '../../const';
 import { Offer } from '../../types/offer';
 
 type MainPageProps = {
@@ -11,9 +12,15 @@ type MainPageProps = {
 }
 
 function MainPage({offers}: MainPageProps): JSX.Element {
-  const getPointsByCity = (city: string) => offers.filter((offer) => offer.city.name === city);
-
+  const getOffersByCity = (city: string) => offers.filter((offer) => offer.city.name === city);
+  const {selectedCity} = useParams() as {selectedCity: string};
+  const isRootPath = useMatch(AppRoute.Root);
+  const selectedCityOffers = getOffersByCity(selectedCity);
   const cities = (Object.keys(City) as Array<City>);
+
+  if (isRootPath) {
+    return <Navigate to={generatePath(AppRoute.City, {selectedCity: DEFAULT_CITY})} />;
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -57,7 +64,7 @@ function MainPage({offers}: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{selectedCityOffers.length} places to stay in {selectedCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -73,10 +80,10 @@ function MainPage({offers}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList offers={offers}/>
+              <OffersList offers={selectedCityOffers}/>
             </section>
             <div className="cities__right-section">
-              <Map city={offers[0].city} points={getPointsByCity(offers[0].city.name)}/>
+              <Map points={selectedCityOffers}/>
             </div>
           </div>
         </div>

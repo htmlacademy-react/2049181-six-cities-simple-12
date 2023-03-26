@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import {Map, TileLayer} from 'leaflet';
+import { Map, TileLayer } from 'leaflet';
 import { Location } from '../../types/offer';
 
 function useMap(mapRef: React.RefObject<HTMLElement | null>, location: Location): Map | null {

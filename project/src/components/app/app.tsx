@@ -26,6 +26,12 @@ function App({offers, reviews}: AppProps): JSX.Element {
             }
           />
           <Route
+            path={AppRoute.City}
+            element = {
+              <MainPage offers={offers}/>
+            }
+          />
+          <Route
             path={AppRoute.Login}
             element={<LoginPage/>}
           />

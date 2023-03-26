@@ -1,10 +1,9 @@
-export const MAX_OFFER_GALLERY_IMAGES = 6;
-
 export enum AppRoute {
   Root = '/',
+  City = '/:selectedCity',
   Main = '/main',
   Login = '/login',
-  Room = '/offer/:id',
+  Room = ':city/offer/:id',
   DevMainEmpty = 'dev-main-empty',
   DevPropertyNotLogged = 'dev-room-not-logged'
 }
@@ -22,3 +21,6 @@ export enum City {
   Hamburg = 'Hamburg',
   Dusseldorf = 'Dusseldorf'
 }
+
+export const MAX_OFFER_GALLERY_IMAGES = 6;
+export const DEFAULT_CITY = City.Paris;
