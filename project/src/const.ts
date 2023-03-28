@@ -1,9 +1,8 @@
 export enum AppRoute {
   Root = '/',
-  City = '/:selectedCity',
   Main = '/main',
   Login = '/login',
-  Room = ':city/offer/:id',
+  Room = '/offer/:id',
   DevMainEmpty = 'dev-main-empty',
   DevPropertyNotLogged = 'dev-room-not-logged'
 }

@@ -1,26 +1,15 @@
 import { Helmet } from 'react-helmet-async';
-import { useParams, useMatch, generatePath, Navigate} from 'react-router-dom';
 import CitiesTabs from '../../components/cities-tabs/cities-tabs';
 import Logo from '../../components/logo/logo';
 import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
-import { AppRoute, City, DEFAULT_CITY } from '../../const';
-import { Offer } from '../../types/offer';
+import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
 
-type MainPageProps = {
-  offers: Offer[];
-}
-
-function MainPage({offers}: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
+  const offers = useAppSelector((store) => store.allOffers);
+  const selectedCity = useAppSelector((store) => store.city);
   const getOffersByCity = (city: string) => offers.filter((offer) => offer.city.name === city);
-  const {selectedCity} = useParams() as {selectedCity: string};
-  const isRootPath = useMatch(AppRoute.Root);
   const selectedCityOffers = getOffersByCity(selectedCity);
-  const cities = (Object.keys(City) as Array<City>);
-
-  if (isRootPath) {
-    return <Navigate to={generatePath(AppRoute.City, {selectedCity: DEFAULT_CITY})} />;
-  }
 
   return (
     <div className="page page--gray page--main">
@@ -59,7 +48,7 @@ function MainPage({offers}: MainPageProps): JSX.Element {
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <CitiesTabs cities={cities}/>
+        <CitiesTabs/>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">

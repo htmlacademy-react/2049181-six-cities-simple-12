@@ -1,7 +1,6 @@
 import Logo from '../../components/logo/logo';
 import { Helmet } from 'react-helmet-async';
-import { Offer } from '../../types/offer';
-import { Review } from '../../types/review';
+import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
 import OfferGallery from '../../components/offer/gallery/gallery';
 import Mark from '../../components/offer/mark/mark';
 import Name from '../../components/offer/name/name';
@@ -14,12 +13,9 @@ import Host from '../../components/offer/host/host';
 import Reviews from '../../components/offer/reviews/reviews';
 import { ClassType } from '../../const';
 
-type OfferPageProps = {
-  offers: Offer[];
-  reviews: Review[];
-}
-
-function OfferPage({offers, reviews}: OfferPageProps): JSX.Element {
+function OfferPage(): JSX.Element {
+  const offers = useAppSelector((store) => store.allOffers);
+  const reviews = useAppSelector((store) => store.reviews);
   const {id} = useParams() as {id: string};
   const offer = offers.find((o) => o.id === parseInt(id, 10));
 

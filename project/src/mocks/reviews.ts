@@ -11,7 +11,7 @@ export const reviews: Review[] = [
     },
     rating: 2,
     comment: 'Bathed in the nature. Completely unplugged. Unforgettable.',
-    date: new Date('2023-02-19T07:31:24.880Z')
+    date: '2023-02-19T07:31:24.880Z'
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ export const reviews: Review[] = [
     },
     rating: 3,
     comment: 'We loved it so much, the house, the veiw, the location just great.. Highly reccomend :)',
-    date: new Date('2023-02-22T07:31:24.881Z')
+    date: '2023-02-22T07:31:24.881Z'
   },
   {
     id: 3,
@@ -35,6 +35,6 @@ export const reviews: Review[] = [
     },
     rating: 4,
     comment: 'The deluxe room was a quite comfortable one with all the adequate facilities. The only thing that made me feel uncomfortable was the rude behavior of an impolite staff at the reception desk.',
-    date: new Date('2023-02-22T07:31:24.881Z')
+    date: '2023-02-22T07:31:24.881Z'
   }
 ];
