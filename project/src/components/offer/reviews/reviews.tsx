@@ -32,7 +32,7 @@ function Reviews({reviews}: ReviewsProps): JSX.Element {
               <p className="reviews__text">
                 {comment}
               </p>
-              <time className="reviews__time" dateTime={dateToString(date)}>{humanizeDate(date)}</time>
+              <time className="reviews__time" dateTime={dateToString(new Date(date))}>{humanizeDate(new Date(date))}</time>
             </div>
           </li>
         ))}

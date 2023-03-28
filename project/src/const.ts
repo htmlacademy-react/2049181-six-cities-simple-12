@@ -1,5 +1,3 @@
-export const MAX_OFFER_GALLERY_IMAGES = 6;
-
 export enum AppRoute {
   Root = '/',
   Main = '/main',
@@ -13,3 +11,15 @@ export enum ClassType {
   OfferPage = 'property',
   OfferCard = 'place-card'
 }
+
+export enum City {
+  Paris = 'Paris',
+  Cologne = 'Cologne',
+  Brussels = 'Brussels',
+  Amsterdam = 'Amsterdam',
+  Hamburg = 'Hamburg',
+  Dusseldorf = 'Dusseldorf'
+}
+
+export const MAX_OFFER_GALLERY_IMAGES = 6;
+export const DEFAULT_CITY = City.Paris;

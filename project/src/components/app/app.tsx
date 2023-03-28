@@ -5,16 +5,8 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoginPage from '../../pages/login-page/login-page';
 import MainPage from '../../pages/main-page/main-page';
 import OfferPage from '../../pages/offer-page/offer-page';
-import { Offer } from '../../types/offer';
-import { Review } from '../../types/review';
 
-type AppProps = {
-  cardsCount: number;
-  offers: Offer[];
-  reviews: Review[];
-}
-
-function App({cardsCount, offers, reviews}: AppProps): JSX.Element {
+function App(): JSX.Element {
 
   return (
     <HelmetProvider>
@@ -23,7 +15,7 @@ function App({cardsCount, offers, reviews}: AppProps): JSX.Element {
           <Route
             path={AppRoute.Root}
             element={
-              <MainPage offers={offers}/>
+              <MainPage/>
             }
           />
           <Route
@@ -33,10 +25,7 @@ function App({cardsCount, offers, reviews}: AppProps): JSX.Element {
           <Route
             path={AppRoute.Room}
             element={
-              <OfferPage
-                offers={offers}
-                reviews={reviews}
-              />
+              <OfferPage/>
             }
           />
           <Route
