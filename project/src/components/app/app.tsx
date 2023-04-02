@@ -5,8 +5,17 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoginPage from '../../pages/login-page/login-page';
 import MainPage from '../../pages/main-page/main-page';
 import OfferPage from '../../pages/offer-page/offer-page';
+import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
+import LoadingPage from '../../pages/loading-page/loading-page';
 
 function App(): JSX.Element {
+  const isOffersDataLoading = useAppSelector((state) => state.allOffersDataLoadingStatus);
+
+  if(isOffersDataLoading) {
+    return (
+      <LoadingPage/>
+    );
+  }
 
   return (
     <HelmetProvider>
