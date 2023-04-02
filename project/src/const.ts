@@ -25,5 +25,11 @@ export enum APIRoute {
   Offers = '/hotels'
 }
 
+export enum AuthorizationStatus {
+  Unknown = 'UNKNOWN',
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH'
+}
+
 export const MAX_OFFER_GALLERY_IMAGES = 6;
 export const DEFAULT_CITY = City.Paris;
