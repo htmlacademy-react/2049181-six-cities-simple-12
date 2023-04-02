@@ -21,5 +21,9 @@ export enum City {
   Dusseldorf = 'Dusseldorf'
 }
 
+export enum APIRoute {
+  Offers = '/hotels'
+}
+
 export const MAX_OFFER_GALLERY_IMAGES = 6;
 export const DEFAULT_CITY = City.Paris;
