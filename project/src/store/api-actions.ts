@@ -4,6 +4,8 @@ import { AxiosInstance} from 'axios';
 import { Offers } from '../types/offer';
 import { APIRoute, AuthorizationStatus } from '../const';
 import { changeAuthorizationStatus, loadAllOffers, setAllOffersLoadingStatus } from './action';
+import { AuthData } from '../types/auth-data';
+import { UserData } from '../types/user-data';
 
 export const fetchAllOffersAction = createAsyncThunk<void, undefined, {
  dispatch: AppDispatch;
@@ -31,6 +33,24 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
       dispatch(changeAuthorizationStatus(AuthorizationStatus.Auth));
     } catch {
       dispatch(changeAuthorizationStatus(AuthorizationStatus.NoAuth));
+    }
+  }
+);
+
+
+export const loginAction = createAsyncThunk<void, AuthData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/login',
+  async ({email, password}, {dispatch, extra: api}) => {
+    try {
+      const data = await api.post<UserData>(APIRoute.Login, {email, password});
+      console.log(data);
+      dispatch(changeAuthorizationStatus(AuthorizationStatus.Auth));
+    } catch {
+      console.log('login error');
     }
   }
 );
