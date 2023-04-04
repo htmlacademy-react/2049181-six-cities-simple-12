@@ -2,6 +2,7 @@ import Logo from '../../components/header/logo/logo';
 import { Helmet } from 'react-helmet-async';
 import { object, string } from 'yup';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 function LoginPage(): JSX.Element {
   const [formData, setFormData] = useState({
@@ -62,7 +63,7 @@ function LoginPage(): JSX.Element {
                     console.log(responseData);
                   })
                   .catch ((err) => {
-                    console.log(err.errors[0]);
+                    toast.warn<string>(err.errors[0]);
                   });
               }}
               noValidate
