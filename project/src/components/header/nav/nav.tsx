@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
-import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
+import { AppRoute, AuthorizationStatus } from '../../../const';
+import { useAppSelector } from '../../../hooks/useAppSelector/use-app-selector';
 
-function HeaderNav(): JSX.Element {
+function Nav(): JSX.Element {
   const isAuthorized = (useAppSelector((state)=> state.authorizationStatus)) === AuthorizationStatus.Auth;
 
   const handleNavItem = () => isAuthorized
@@ -39,4 +39,4 @@ function HeaderNav(): JSX.Element {
   );
 }
 
-export default HeaderNav;
+export default Nav;

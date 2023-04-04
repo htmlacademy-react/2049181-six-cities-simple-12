@@ -1,10 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import CitiesTabs from '../../components/cities-tabs/cities-tabs';
-import Logo from '../../components/logo/logo';
 import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
 import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
-import HeaderNav from '../../components/header-nav/header-nav';
+import Header from '../../components/header/header';
 
 function MainPage(): JSX.Element {
   const offers = useAppSelector((store) => store.allOffers);
@@ -21,18 +20,7 @@ function MainPage(): JSX.Element {
       <Helmet>
         <title>Six Cities</title>
       </Helmet>
-
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo/>
-            </div>
-            <HeaderNav/>
-          </div>
-        </div>
-      </header>
-
+      <Header/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <CitiesTabs/>

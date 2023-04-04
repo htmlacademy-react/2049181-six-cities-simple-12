@@ -1,4 +1,3 @@
-import Logo from '../../components/logo/logo';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
 import OfferGallery from '../../components/offer/gallery/gallery';
@@ -12,6 +11,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import Host from '../../components/offer/host/host';
 import Reviews from '../../components/offer/reviews/reviews';
 import { ClassType } from '../../const';
+import Header from '../../components/header/header';
 
 function OfferPage(): JSX.Element {
   const offers = useAppSelector((store) => store.allOffers);
@@ -47,31 +47,7 @@ function OfferPage(): JSX.Element {
         <title>{`Six Cities: ${name} room page`}</title>
       </Helmet>
 
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo/>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <div className="header__nav-profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </div>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="/">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header/>
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
