@@ -16,7 +16,7 @@ const initialState: InitialState = {
   allOffers: [],
   reviews: [],
   city: City.Paris,
-  allOffersDataLoadingStatus: false,
+  allOffersDataLoadingStatus: true,
   authorizationStatus: AuthorizationStatus.Unknown
 };
 
