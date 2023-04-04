@@ -1,7 +1,31 @@
 import Logo from '../../components/header/logo/logo';
 import { Helmet } from 'react-helmet-async';
+import { object, string } from 'yup';
+import { useState } from 'react';
 
 function LoginPage(): JSX.Element {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const fieldChangeHandle = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = evt.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const schema = object({
+    email: string()
+      .required('Email is required')
+      .email('Invalid email'),
+    password: string()
+      .required('Password is required')
+      .matches(/^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{2,}$/, 'Password must contain a letter and a number')
+  });
+
   return (
     <div className="page page--gray page--login">
       <div style={{display: 'none'}}>
@@ -32,16 +56,24 @@ function LoginPage(): JSX.Element {
               method="post"
               onSubmit={(evt) => {
                 evt.preventDefault();
-                console.log(evt);
+                schema.validate(formData, {abortEarly: false})
+                  .then((responseData) => {
+                    console.log('no validate errors');
+                    console.log(responseData);
+                  })
+                  .catch ((err) => {
+                    console.log(err.errors[0]);
+                  });
               }}
+              noValidate
             >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input className="login__input form__input" type="email" name="email" placeholder="Email" required/>
+                <input className="login__input form__input" type="email" name="email" placeholder="Email" onChange={fieldChangeHandle} />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input className="login__input form__input" type="password" name="password" placeholder="Password" required/>
+                <input className="login__input form__input" type="password" name="password" placeholder="Password" onChange={fieldChangeHandle} />
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>
