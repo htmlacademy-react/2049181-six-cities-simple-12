@@ -63,7 +63,7 @@ function LoginPage(): JSX.Element {
                     console.log(responseData);
                   })
                   .catch ((err) => {
-                    toast.warn<string>(err.errors[0]);
+                    toast.warn(err.errors[0]);
                   });
               }}
               noValidate
