@@ -3,9 +3,10 @@ import { AppDispatch, State } from '../types/state';
 import { AxiosInstance} from 'axios';
 import { Offers } from '../types/offer';
 import { APIRoute, AuthorizationStatus } from '../const';
-import { changeAuthorizationStatus, loadAllOffers, setAllOffersLoadingStatus } from './action';
+import { changeAuthorizationStatus, loadAllOffers, setAllOffersLoadingStatus, setUserAvatarUrl, setUserEmail } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
+import { saveToken } from '../services/token';
 
 export const fetchAllOffersAction = createAsyncThunk<void, undefined, {
  dispatch: AppDispatch;
@@ -29,9 +30,10 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      await api.get(APIRoute.Login);
+      const data = await api.get<UserData>(APIRoute.Login);
+      dispatch(setUserEmail(data.data.email));
+      dispatch(setUserAvatarUrl(data.data.avatarUrl));
       dispatch(changeAuthorizationStatus(AuthorizationStatus.Auth));
-      console.log('auth');
     } catch {
       dispatch(changeAuthorizationStatus(AuthorizationStatus.NoAuth));
     }
@@ -48,10 +50,12 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   async ({email, password}, {dispatch, extra: api}) => {
     try {
       const data = await api.post<UserData>(APIRoute.Login, {email, password});
-      console.log(data);
+      saveToken(data.data.token);
+      dispatch(setUserEmail(data.data.email));
+      dispatch(setUserAvatarUrl(data.data.avatarUrl));
       dispatch(changeAuthorizationStatus(AuthorizationStatus.Auth));
     } catch {
-      console.log('login error');
+      dispatch(changeAuthorizationStatus(AuthorizationStatus.NoAuth));
     }
   }
 );

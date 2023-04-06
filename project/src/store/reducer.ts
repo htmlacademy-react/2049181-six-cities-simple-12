@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, loadReviews, loadAllOffers, setAllOffersLoadingStatus, changeAuthorizationStatus } from './action';
+import { changeCity, loadReviews, loadAllOffers, setAllOffersLoadingStatus, changeAuthorizationStatus, setUserEmail, setUserAvatarUrl } from './action';
 import { Offer } from '../types/offer';
 import { AuthorizationStatus, City } from '../const';
 import { Review } from '../types/review';
@@ -10,6 +10,8 @@ type InitialState = {
   city: City;
   allOffersDataLoadingStatus: boolean;
   authorizationStatus: AuthorizationStatus;
+  userEmail: string;
+  userAvatarUrl: string;
 }
 
 const initialState: InitialState = {
@@ -17,7 +19,9 @@ const initialState: InitialState = {
   reviews: [],
   city: City.Paris,
   allOffersDataLoadingStatus: true,
-  authorizationStatus: AuthorizationStatus.Unknown
+  authorizationStatus: AuthorizationStatus.Unknown,
+  userEmail: '',
+  userAvatarUrl: ''
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -36,5 +40,11 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(setUserEmail, (state, action) => {
+      state.userEmail = action.payload;
+    })
+    .addCase(setUserAvatarUrl, (state, action) => {
+      state.userAvatarUrl = action.payload;
     });
 });

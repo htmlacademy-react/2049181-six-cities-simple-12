@@ -1,10 +1,16 @@
 import Logo from '../../components/header/logo/logo';
 import { Helmet } from 'react-helmet-async';
-import { object, string } from 'yup';
+import { ValidationError, object, string } from 'yup';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
+import { loginAction } from '../../store/api-actions';
+import { useNavigate } from 'react-router';
+import { AppRoute } from '../../const';
 
 function LoginPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -21,7 +27,7 @@ function LoginPage(): JSX.Element {
   const schema = object({
     email: string()
       .required('Email is required')
-      .email('Invalid email'),
+      .matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Invalid Email'),
     password: string()
       .required('Password is required')
       .matches(/^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{2,}$/, 'Password must contain a letter and a number')
@@ -59,10 +65,10 @@ function LoginPage(): JSX.Element {
                 evt.preventDefault();
                 schema.validate(formData, {abortEarly: false})
                   .then((responseData) => {
-                    console.log('no validate errors');
-                    console.log(responseData);
+                    dispatch(loginAction(responseData));
+                    navigate(AppRoute.Root);
                   })
-                  .catch ((err) => {
+                  .catch ((err: ValidationError) => {
                     toast.warn(err.errors[0]);
                   });
               }}
