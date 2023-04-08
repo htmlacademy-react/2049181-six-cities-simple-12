@@ -1,12 +1,13 @@
 import Logo from '../../components/header/logo/logo';
 import { Helmet } from 'react-helmet-async';
 import { ValidationError, object, string } from 'yup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
 import { loginAction } from '../../store/api-actions';
 import { useNavigate } from 'react-router';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
 
 function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -14,6 +15,13 @@ function LoginPage(): JSX.Element {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
+  });
+  const isUserAuthorized = (useAppSelector((state) => state.authorizationStatus)) === AuthorizationStatus.Auth;
+
+  useEffect(() => {
+    if (isUserAuthorized) {
+      navigate(AppRoute.Root);
+    }
   });
 
   const fieldChangeHandle = (evt: React.ChangeEvent<HTMLInputElement>) => {
