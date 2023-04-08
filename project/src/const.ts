@@ -22,7 +22,14 @@ export enum City {
 }
 
 export enum APIRoute {
-  Offers = '/hotels'
+  Offers = '/hotels',
+  Login = '/login'
+}
+
+export enum AuthorizationStatus {
+  Unknown = 'UNKNOWN',
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH'
 }
 
 export const MAX_OFFER_GALLERY_IMAGES = 6;

@@ -1,7 +1,46 @@
-import Logo from '../../components/logo/logo';
+import Logo from '../../components/header/logo/logo';
 import { Helmet } from 'react-helmet-async';
+import { ValidationError, object, string } from 'yup';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
+import { loginAction } from '../../store/api-actions';
+import { useNavigate } from 'react-router';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
 
 function LoginPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const isUserAuthorized = (useAppSelector((state) => state.authorizationStatus)) === AuthorizationStatus.Auth;
+
+  useEffect(() => {
+    if (isUserAuthorized) {
+      navigate(AppRoute.Root);
+    }
+  });
+
+  const fieldChangeHandle = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = evt.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const schema = object({
+    email: string()
+      .required('Email is required')
+      .matches(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Invalid Email'),
+    password: string()
+      .required('Password is required')
+      .matches(/^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{2,}$/, 'Password must contain a letter and a number')
+  });
+
   return (
     <div className="page page--gray page--login">
       <div style={{display: 'none'}}>
@@ -26,14 +65,30 @@ function LoginPage(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form
+              className="login__form form"
+              action="#"
+              method="post"
+              onSubmit={(evt) => {
+                evt.preventDefault();
+                schema.validate(formData, {abortEarly: false})
+                  .then((responseData) => {
+                    dispatch(loginAction(responseData));
+                    navigate(AppRoute.Root);
+                  })
+                  .catch ((err: ValidationError) => {
+                    toast.warn(err.errors[0]);
+                  });
+              }}
+              noValidate
+            >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input className="login__input form__input" type="email" name="email" placeholder="Email" required/>
+                <input className="login__input form__input" type="email" name="email" placeholder="Email" onChange={fieldChangeHandle} />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input className="login__input form__input" type="password" name="password" placeholder="Password" required/>
+                <input className="login__input form__input" type="password" name="password" placeholder="Password" onChange={fieldChangeHandle} />
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>

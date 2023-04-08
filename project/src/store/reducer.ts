@@ -1,21 +1,28 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, loadReviews, loadAllOffers, setAllOffersLoadingStatus } from './action';
+import { changeCity, loadReviews, loadAllOffers, changeAuthorizationStatus, setUserEmail, setUserAvatarUrl } from './action';
 import { Offer } from '../types/offer';
-import { City } from '../const';
+import { AuthorizationStatus, City } from '../const';
 import { Review } from '../types/review';
+import { fetchAllOffersAction } from './api-actions';
 
 type InitialState = {
   allOffers: Offer[];
   reviews: Review[];
   city: City;
   allOffersDataLoadingStatus: boolean;
+  authorizationStatus: AuthorizationStatus;
+  userEmail: string;
+  userAvatarUrl: string;
 }
 
 const initialState: InitialState = {
   allOffers: [],
   reviews: [],
   city: City.Paris,
-  allOffersDataLoadingStatus: false
+  allOffersDataLoadingStatus: true,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  userEmail: '',
+  userAvatarUrl: ''
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -29,7 +36,19 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(changeCity, (state, action) => {
       state.city = action.payload;
     })
-    .addCase(setAllOffersLoadingStatus, (state, action) => {
-      state.allOffersDataLoadingStatus = action.payload;
+    .addCase(changeAuthorizationStatus, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUserEmail, (state, action) => {
+      state.userEmail = action.payload;
+    })
+    .addCase(setUserAvatarUrl, (state, action) => {
+      state.userAvatarUrl = action.payload;
+    })
+    .addCase(fetchAllOffersAction.pending, (state) => {
+      state.allOffersDataLoadingStatus = true;
+    })
+    .addCase(fetchAllOffersAction.fulfilled, (state) => {
+      state.allOffersDataLoadingStatus = false;
     });
 });
