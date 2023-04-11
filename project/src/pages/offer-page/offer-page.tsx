@@ -15,12 +15,14 @@ import Header from '../../components/header/header';
 import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
 import { fetchCommentsAction } from '../../store/api-actions';
 import { useEffect } from 'react';
+import LoadingPage from '../loading-page/loading-page';
 
 function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const {id} = useParams() as {id: string};
   const offers = useAppSelector((store) => store.allOffers);
   const offer = offers.find((o) => o.id === parseInt(id, 10));
+  const isReviewsLoading = useAppSelector((state) => state.reviewsDataLoadingStatus);
 
   useEffect(() => {
     dispatch(fetchCommentsAction(id));
@@ -43,6 +45,10 @@ function OfferPage(): JSX.Element {
     host,
     description
   } = offer;
+
+  if (isReviewsLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="page">

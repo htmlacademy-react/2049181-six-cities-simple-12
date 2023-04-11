@@ -3,13 +3,14 @@ import { changeCity, loadReviews, loadAllOffers, changeAuthorizationStatus, setU
 import { Offer } from '../types/offer';
 import { AuthorizationStatus, City } from '../const';
 import { Review } from '../types/review';
-import { fetchAllOffersAction } from './api-actions';
+import { fetchAllOffersAction, fetchCommentsAction } from './api-actions';
 
 type InitialState = {
   allOffers: Offer[];
   reviews: Review[];
   city: City;
   allOffersDataLoadingStatus: boolean;
+  reviewsDataLoadingStatus: boolean;
   authorizationStatus: AuthorizationStatus;
   userEmail: string;
   userAvatarUrl: string;
@@ -20,6 +21,7 @@ const initialState: InitialState = {
   reviews: [],
   city: City.Paris,
   allOffersDataLoadingStatus: true,
+  reviewsDataLoadingStatus: true,
   authorizationStatus: AuthorizationStatus.Unknown,
   userEmail: '',
   userAvatarUrl: ''
@@ -50,5 +52,11 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchAllOffersAction.fulfilled, (state) => {
       state.allOffersDataLoadingStatus = false;
+    })
+    .addCase(fetchCommentsAction.pending, (state) => {
+      state.reviewsDataLoadingStatus = true;
+    })
+    .addCase(fetchCommentsAction.fulfilled, (state) => {
+      state.reviewsDataLoadingStatus = false;
     });
 });
