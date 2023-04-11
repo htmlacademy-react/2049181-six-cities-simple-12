@@ -33,5 +33,10 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH'
 }
 
+export enum OfferType {
+  Cities = 'cities',
+  Near = 'near'
+}
+
 export const MAX_OFFER_GALLERY_IMAGES = 6;
 export const DEFAULT_CITY = City.Paris;

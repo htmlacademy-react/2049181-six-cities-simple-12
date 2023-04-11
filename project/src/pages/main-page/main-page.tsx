@@ -4,6 +4,7 @@ import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
 import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
 import Header from '../../components/header/header';
+import { OfferType } from '../../const';
 
 function MainPage(): JSX.Element {
   const offers = useAppSelector((store) => store.allOffers);
@@ -44,7 +45,7 @@ function MainPage(): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList offers={selectedCityOffers}/>
+              <OffersList offers={selectedCityOffers} type={OfferType.Cities}/>
             </section>
             <div className="cities__right-section">
               <Map points={selectedCityOffers}/>
