@@ -1,11 +1,11 @@
-import { OfferType } from '../../const';
+import { PageType } from '../../const';
 import { Offer } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
 import { useState } from 'react';
 import classNames from 'classnames';
 
 type OffersListProps = {
-  type: OfferType;
+  type: PageType;
   offers: Offer[];
 }
 
@@ -18,10 +18,10 @@ function OffersList({offers, type}: OffersListProps): JSX.Element {
   return (
     <div className={
       classNames({
-        [`${type}-places__list`]: type === OfferType.Near,
-        [`${type}__places-list`]: type === OfferType.Cities,
+        [`${type}-places__list`]: type === PageType.Near,
+        [`${type}__places-list`]: type === PageType.Cities,
         'places__list': true,
-        'tabs__content': type === OfferType.Cities
+        'tabs__content': type === PageType.Cities
       })
     }
     >

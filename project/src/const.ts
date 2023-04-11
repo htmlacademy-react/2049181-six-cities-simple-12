@@ -33,7 +33,7 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH'
 }
 
-export enum OfferType {
+export enum PageType {
   Cities = 'cities',
   Near = 'near'
 }

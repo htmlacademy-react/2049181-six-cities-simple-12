@@ -10,13 +10,14 @@ import Goods from '../../components/offer/goods/goods';
 import { Navigate, useParams } from 'react-router-dom';
 import Host from '../../components/offer/host/host';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
-import { ClassType, OfferType } from '../../const';
+import { ClassType, PageType } from '../../const';
 import Header from '../../components/header/header';
 import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
 import { fetchCommentsAction, fetchNearbyOffersAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import LoadingPage from '../loading-page/loading-page';
 import OffersList from '../../components/offers-list/offers-list';
+import Map from '../../components/map/map';
 
 function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -81,12 +82,12 @@ function OfferPage(): JSX.Element {
               <ReviewsList />
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map points={nearbyOffers} type={PageType.Near} />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OffersList type={OfferType.Near} offers={nearbyOffers}/>
+            <OffersList type={PageType.Near} offers={nearbyOffers}/>
           </section>
         </div>
       </main>
