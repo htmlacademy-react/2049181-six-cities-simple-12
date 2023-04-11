@@ -9,15 +9,22 @@ import Price from '../../components/offer/price/price';
 import Goods from '../../components/offer/goods/goods';
 import { Navigate, useParams } from 'react-router-dom';
 import Host from '../../components/offer/host/host';
-import Reviews from '../../components/offer/reviews/reviews';
+import ReviewsList from '../../components/offer/reviews-list/reviews-list';
 import { ClassType } from '../../const';
 import Header from '../../components/header/header';
+import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
+import { fetchCommentsAction } from '../../store/api-actions';
+import { useEffect } from 'react';
 
 function OfferPage(): JSX.Element {
-  const offers = useAppSelector((store) => store.allOffers);
-  const reviews = useAppSelector((store) => store.reviews);
+  const dispatch = useAppDispatch();
   const {id} = useParams() as {id: string};
+  const offers = useAppSelector((store) => store.allOffers);
   const offer = offers.find((o) => o.id === parseInt(id, 10));
+
+  useEffect(() => {
+    dispatch(fetchCommentsAction(id));
+  }, [id, dispatch]);
 
   if (!offer) {
     return <Navigate to="*"/>;
@@ -62,7 +69,7 @@ function OfferPage(): JSX.Element {
               <Price price={price}/>
               <Goods goods={goods}/>
               <Host host={host} description={description}/>
-              <Reviews reviews={reviews}/>
+              <ReviewsList />
             </div>
           </div>
           <section className="property__map map"></section>

@@ -23,7 +23,8 @@ export enum City {
 
 export enum APIRoute {
   Offers = '/hotels',
-  Login = '/login'
+  Login = '/login',
+  Comments = '/comments/'
 }
 
 export enum AuthorizationStatus {
