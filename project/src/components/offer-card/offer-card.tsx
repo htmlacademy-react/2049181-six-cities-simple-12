@@ -15,7 +15,7 @@ function OfferCard({offer: {isPremium, previewImage, type, price, rating, title,
     <article className="cities__card place-card" onMouseEnter={() => setActiveOfferId(id)} onMouseLeave={() => setActiveOfferId(-1)}>
       {isPremium && <Mark classType={ClassType.OfferCard}/>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`offer/${id}`}>
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt={capitalize(type)}/>
         </Link>
       </div>

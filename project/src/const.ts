@@ -23,13 +23,19 @@ export enum City {
 
 export enum APIRoute {
   Offers = '/hotels',
-  Login = '/login'
+  Login = '/login',
+  Comments = '/comments/'
 }
 
 export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH'
+}
+
+export enum PageType {
+  Cities = 'cities',
+  Near = 'near'
 }
 
 export const MAX_OFFER_GALLERY_IMAGES = 6;

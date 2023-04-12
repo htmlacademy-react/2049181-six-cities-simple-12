@@ -3,9 +3,12 @@ import 'leaflet/dist/leaflet.css';
 import { useRef, useEffect } from 'react';
 import { Location, Offer } from '../../types/offer';
 import { Icon, Marker, layerGroup } from 'leaflet';
+import { PageType } from '../../const';
+import classNames from 'classnames';
 
 type MapProps = {
   points: Offer[];
+  type: PageType;
 }
 
 const defaultPin = new Icon({
@@ -14,7 +17,7 @@ const defaultPin = new Icon({
   iconAnchor: [13.5, 39]
 });
 
-function Map({points}: MapProps): JSX.Element {
+function Map({points, type}: MapProps): JSX.Element {
   const handleLocation = ():Location => {
     if (points.length > 0) {
       return points[0].city.location;
@@ -30,6 +33,13 @@ function Map({points}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
   const markersLayer = layerGroup();
+  const style = type === PageType.Cities
+    ? {}
+    : {
+      'width': '1144px',
+      left: '50%',
+      transform: 'translateX(-50%)'
+    };
 
   useEffect(() => {
     if (map) {
@@ -51,7 +61,13 @@ function Map({points}: MapProps): JSX.Element {
   }, [map, points, location, markersLayer]);
 
   return(
-    <section className="cities__map map" ref={mapRef}></section>
+    <section className={classNames({
+      'cities__map': type === PageType.Cities,
+      'property__map': type === PageType.Near,
+      'map': true})} ref={mapRef}
+    style={style}
+    >
+    </section>
   );
 }
 

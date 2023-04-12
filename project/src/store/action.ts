@@ -4,6 +4,7 @@ import { Offers } from '../types/offer';
 import { Reviews } from '../types/review';
 
 export const loadAllOffers = createAction<Offers>('offers/loadAllOffers');
+export const loadNearbyOffers = createAction<Offers>('offers/loadNearbyOffers');
 export const loadReviews = createAction<Reviews>('reviews/loadReviews');
 export const changeCity = createAction<City>('misc/changeCity');
 export const changeAuthorizationStatus = createAction<AuthorizationStatus>('user/changeAuthorizationStatus');
