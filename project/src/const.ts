@@ -12,6 +12,13 @@ export enum ClassType {
   OfferCard = 'place-card'
 }
 
+export enum SortType {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRated = 'Top rated first'
+}
+
 export enum City {
   Paris = 'Paris',
   Cologne = 'Cologne',
