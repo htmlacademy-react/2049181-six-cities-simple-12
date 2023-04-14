@@ -11,6 +11,7 @@ import { sortOffers } from '../../utils/sort';
 
 function MainPage(): JSX.Element {
   const [currentSortType, setCurrentSortType] = useState(SortType.Popular);
+  const [activePointId, setActivePointId] = useState(-1);
   const sortTypeChangeHandler = (sortType: SortType) => setCurrentSortType(sortType);
   const getOffersByCity = (city: string) => offers.filter((offer) => offer.city.name === city);
   const offers = useAppSelector((store) => store.allOffers);
@@ -36,10 +37,10 @@ function MainPage(): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{selectedCityOffers.length} places to stay in {selectedCity}</b>
               <SortOptions onSortTypeChange={sortTypeChangeHandler}/>
-              <OffersList offers={selectedCityOffers} type={PageType.Cities}/>
+              <OffersList offers={selectedCityOffers} type={PageType.Cities} onSelectedPinChange={setActivePointId}/>
             </section>
             <div className="cities__right-section">
-              <Map points={selectedCityOffers} type={PageType.Cities}/>
+              <Map points={selectedCityOffers} type={PageType.Cities} selectedPointId={activePointId}/>
             </div>
           </div>
         </div>
