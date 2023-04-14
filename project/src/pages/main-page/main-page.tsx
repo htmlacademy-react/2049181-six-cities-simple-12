@@ -6,13 +6,16 @@ import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
 import Header from '../../components/header/header';
 import { PageType, SortType } from '../../const';
 import SortOptions from '../../components/sort-options/sort-options';
+import { useState } from 'react';
+import { sortOffers } from '../../utils/sort';
 
 function MainPage(): JSX.Element {
+  const [currentSortType, setCurrentSortType] = useState(SortType.Popular);
+  const sortTypeChangeHandler = (sortType: SortType) => setCurrentSortType(sortType);
+  const getOffersByCity = (city: string) => offers.filter((offer) => offer.city.name === city);
   const offers = useAppSelector((store) => store.allOffers);
   const selectedCity = useAppSelector((store) => store.city);
-  const getOffersByCity = (city: string) => offers.filter((offer) => offer.city.name === city);
-  const selectedCityOffers = getOffersByCity(selectedCity);
-  const sortTypeChangeHandler = (sortType: SortType) => console.log(sortType);
+  const selectedCityOffers = sortOffers(getOffersByCity(selectedCity), currentSortType);
 
   return (
     <div className="page page--gray page--main">

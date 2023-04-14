@@ -20,7 +20,7 @@ function SortOptions({onSortTypeChange}: SortOptionsProps): JSX.Element {
 
   useEffect(() => {
     onSortTypeChange(currentSortType);
-  });
+  }, [currentSortType, onSortTypeChange]);
 
   return (
     <form className="places__sorting" action="#" method="get">
