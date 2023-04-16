@@ -29,8 +29,8 @@ function OfferPage(): JSX.Element {
   const isReviewsLoading = useAppSelector((state) => state.reviewsDataLoadingStatus);
 
   useEffect(() => {
-    dispatch(fetchCommentsAction(id));
     dispatch(fetchNearbyOffersAction(id));
+    dispatch(fetchCommentsAction(id));
   }, [id, dispatch]);
 
   if (!offer) {
@@ -80,7 +80,7 @@ function OfferPage(): JSX.Element {
               <Price price={price}/>
               <Goods goods={goods}/>
               <Host host={host} description={description}/>
-              <ReviewsList />
+              <ReviewsList id={id}/>
             </div>
           </div>
           <Map points={nearbyOffers} type={PageType.Near} selectedPointId={activePointId}/>
