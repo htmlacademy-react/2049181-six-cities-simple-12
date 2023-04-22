@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, loadReviews, loadAllOffers, changeAuthorizationStatus, setUserEmail, setUserAvatarUrl, loadNearbyOffers, loadOffer } from './action';
+import { changeCity, loadReviews, loadAllOffers, changeAuthorizationStatus, setUserEmail, setUserAvatarUrl, loadNearbyOffers, loadOffer, changeCurrentOfferDataLoadingStatus } from './action';
 import { Offer } from '../types/offer';
 import { AuthorizationStatus, City } from '../const';
 import { Review } from '../types/review';
@@ -52,6 +52,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(changeCurrentOfferDataLoadingStatus, (state, action) => {
+      state.currentOfferDataLoadingStatus = action.payload;
     })
     .addCase(setUserEmail, (state, action) => {
       state.userEmail = action.payload;

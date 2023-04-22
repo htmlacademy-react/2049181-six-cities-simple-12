@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react';
 import LoadingPage from '../loading-page/loading-page';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
+import { changeCurrentOfferDataLoadingStatus } from '../../store/action';
 
 function OfferPage(): JSX.Element {
   const [activePointId, setActivePointId] = useState(-1);
@@ -32,6 +33,10 @@ function OfferPage(): JSX.Element {
     dispatch(fetchOfferAction(id));
     dispatch(fetchNearbyOffersAction(id));
     dispatch(fetchCommentsAction(id));
+
+    return () => {
+      dispatch(changeCurrentOfferDataLoadingStatus(true));
+    };
   }, [id, dispatch]);
 
   if (isReviewsLoading || isOfferLoading) {
