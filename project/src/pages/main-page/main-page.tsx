@@ -6,10 +6,14 @@ import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
 import Header from '../../components/header/header';
 import { PageType, SortType } from '../../const';
 import SortOptions from '../../components/sort-options/sort-options';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { sortOffers } from '../../utils/sort';
+import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
+import { fetchAllOffersAction } from '../../store/api-actions';
+import LoadingPage from '../loading-page/loading-page';
 
 function MainPage(): JSX.Element {
+  const dispatch = useAppDispatch();
   const [currentSortType, setCurrentSortType] = useState(SortType.Popular);
   const [activePointId, setActivePointId] = useState(-1);
   const sortTypeChangeHandler = (sortType: SortType) => setCurrentSortType(sortType);
@@ -17,6 +21,18 @@ function MainPage(): JSX.Element {
   const offers = useAppSelector((store) => store.allOffers);
   const selectedCity = useAppSelector((store) => store.city);
   const selectedCityOffers = sortOffers(getOffersByCity(selectedCity), currentSortType);
+
+  useEffect(() => {
+    dispatch(fetchAllOffersAction());
+  }, [dispatch]);
+
+  const isOffersDataLoading = useAppSelector((state) => state.allOffersDataLoadingStatus);
+
+  if(isOffersDataLoading) {
+    return (
+      <LoadingPage/>
+    );
+  }
 
   return (
     <div className="page page--gray page--main">
