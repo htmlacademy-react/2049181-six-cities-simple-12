@@ -13,27 +13,37 @@ import ReviewsList from '../../components/offer/reviews-list/reviews-list';
 import { ClassType, PageType } from '../../const';
 import Header from '../../components/header/header';
 import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
-import { fetchCommentsAction, fetchNearbyOffersAction } from '../../store/api-actions';
+import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferAction } from '../../store/api-actions';
 import { useEffect, useState } from 'react';
 import LoadingPage from '../loading-page/loading-page';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
+import { changeCurrentOfferDataLoadingStatus } from '../../store/action';
 
 function OfferPage(): JSX.Element {
   const [activePointId, setActivePointId] = useState(-1);
   const dispatch = useAppDispatch();
   const {id} = useParams() as {id: string};
-  const offers = useAppSelector((store) => store.allOffers);
   const nearbyOffers = useAppSelector((store) => store.nearbyOffers);
-  const offer = offers.find((o) => o.id === parseInt(id, 10));
+  const offer = useAppSelector((store) => store.currentOffer);
   const isReviewsLoading = useAppSelector((state) => state.reviewsDataLoadingStatus);
+  const isOfferLoading = useAppSelector((state) => state.currentOfferDataLoadingStatus);
 
   useEffect(() => {
-    dispatch(fetchCommentsAction(id));
+    dispatch(fetchOfferAction(id));
     dispatch(fetchNearbyOffersAction(id));
+    dispatch(fetchCommentsAction(id));
+
+    return () => {
+      dispatch(changeCurrentOfferDataLoadingStatus(true));
+    };
   }, [id, dispatch]);
 
-  if (!offer) {
+  if (isReviewsLoading || isOfferLoading) {
+    return <LoadingPage />;
+  }
+
+  if ( offer === null) {
     return <Navigate to="*"/>;
   }
 
@@ -50,10 +60,6 @@ function OfferPage(): JSX.Element {
     host,
     description
   } = offer;
-
-  if (isReviewsLoading) {
-    return <LoadingPage />;
-  }
 
   return (
     <div className="page">
@@ -80,7 +86,7 @@ function OfferPage(): JSX.Element {
               <Price price={price}/>
               <Goods goods={goods}/>
               <Host host={host} description={description}/>
-              <ReviewsList />
+              <ReviewsList id={id}/>
             </div>
           </div>
           <Map points={nearbyOffers} type={PageType.Near} selectedPointId={activePointId}/>

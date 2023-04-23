@@ -1,12 +1,14 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, loadReviews, loadAllOffers, changeAuthorizationStatus, setUserEmail, setUserAvatarUrl, loadNearbyOffers } from './action';
+import { changeCity, loadReviews, loadAllOffers, changeAuthorizationStatus, setUserEmail, setUserAvatarUrl, loadNearbyOffers, loadOffer, changeCurrentOfferDataLoadingStatus } from './action';
 import { Offer } from '../types/offer';
 import { AuthorizationStatus, City } from '../const';
 import { Review } from '../types/review';
-import { fetchAllOffersAction, fetchCommentsAction } from './api-actions';
+import { fetchAllOffersAction, fetchCommentsAction, fetchOfferAction } from './api-actions';
 
 type InitialState = {
   allOffers: Offer[];
+  currentOffer: Offer | null;
+  currentOfferDataLoadingStatus: boolean;
   nearbyOffers: Offer[];
   reviews: Review[];
   city: City;
@@ -19,6 +21,8 @@ type InitialState = {
 
 const initialState: InitialState = {
   allOffers: [],
+  currentOffer: null,
+  currentOfferDataLoadingStatus: true,
   nearbyOffers: [],
   reviews: [],
   city: City.Paris,
@@ -34,6 +38,9 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(loadAllOffers, (state, action) => {
       state.allOffers = action.payload;
     })
+    .addCase(loadOffer, (state, action) => {
+      state.currentOffer = action.payload;
+    })
     .addCase(loadNearbyOffers, (state, action) => {
       state.nearbyOffers = action.payload;
     })
@@ -45,6 +52,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(changeCurrentOfferDataLoadingStatus, (state, action) => {
+      state.currentOfferDataLoadingStatus = action.payload;
     })
     .addCase(setUserEmail, (state, action) => {
       state.userEmail = action.payload;
@@ -61,7 +71,19 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchCommentsAction.pending, (state) => {
       state.reviewsDataLoadingStatus = true;
     })
+    .addCase(fetchCommentsAction.rejected, (state) => {
+      state.reviewsDataLoadingStatus = false;
+    })
     .addCase(fetchCommentsAction.fulfilled, (state) => {
       state.reviewsDataLoadingStatus = false;
+    })
+    .addCase(fetchOfferAction.pending, (state) => {
+      state.currentOfferDataLoadingStatus = true;
+    })
+    .addCase(fetchOfferAction.rejected, (state) => {
+      state.currentOfferDataLoadingStatus = false;
+    })
+    .addCase(fetchOfferAction.fulfilled, (state) => {
+      state.currentOfferDataLoadingStatus = false;
     });
 });
