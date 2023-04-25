@@ -34,7 +34,7 @@ function OfferCard({offer: {isPremium, previewImage, type, price, rating, title,
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`offer/${id}`}>{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{capitalize(type)}</p>
       </div>
