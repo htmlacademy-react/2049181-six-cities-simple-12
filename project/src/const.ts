@@ -55,6 +55,7 @@ export const RatingTitle = new Map([
 
 export const MAX_OFFER_GALLERY_IMAGES = 6;
 export const MAX_RATING_STARS = 5;
+export const MAX_REVIEWS_COUNT = 10;
 export const MIN_REVIEW_LENGTH = 50;
 export const MAX_REVIEW_LENGTH = 300;
 export const DEFAULT_CITY = City.Paris;

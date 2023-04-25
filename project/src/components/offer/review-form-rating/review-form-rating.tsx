@@ -1,4 +1,4 @@
-import { RatingTitle } from '../../const';
+import { RatingTitle } from '../../../const';
 
 type ReviewFormProps = {
   value: number;

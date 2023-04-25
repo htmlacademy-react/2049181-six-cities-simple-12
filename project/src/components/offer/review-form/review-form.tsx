@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useAppDispatch } from '../../../hooks/useAppDispatch/use-App-Dispatch';
 import { postCommentAction } from '../../../store/api-actions';
 import { CommentData } from '../../../types/comment-data';
-import ReviewFormRating from '../../review-form-rating/review-form-rating';
+import ReviewFormRating from '../review-form-rating/review-form-rating';
 import { MAX_RATING_STARS, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH } from '../../../const';
 
 type ReviewFormProps = {
