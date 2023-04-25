@@ -73,11 +73,12 @@ function MainPage(): JSX.Element {
               {
                 isNoOffers
                   ? <NoOffers city={selectedCity}/>
-                  : <><h2 className="visually-hidden">Places</h2>
+                  :
+                  <><h2 className="visually-hidden">Places</h2>
                     <b className="places__found">{selectedCityOffers.length} places to stay in {selectedCity}</b>
                     <SortOptions onSortTypeChange={sortTypeChangeHandler}/>
                     <OffersList offers={selectedCityOffers} type={PageType.Cities} onSelectedPinChange={setActivePointId}/>
-                    </>
+                  </>
               }
             </section>
             <div className="cities__right-section">
