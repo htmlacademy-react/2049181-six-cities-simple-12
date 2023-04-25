@@ -89,7 +89,7 @@ function OfferPage(): JSX.Element {
               <ReviewsList id={id}/>
             </div>
           </div>
-          <Map points={nearbyOffers} type={PageType.Near} selectedPointId={activePointId}/>
+          <Map points={nearbyOffers} type={PageType.Near} selectedPointId={activePointId} offerPoint={offer}/>
         </section>
         <div className="container">
           <section className="near-places places">
