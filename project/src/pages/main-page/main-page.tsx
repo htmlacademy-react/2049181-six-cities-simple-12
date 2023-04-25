@@ -11,6 +11,8 @@ import { sortOffers } from '../../utils/sort';
 import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
 import { fetchAllOffersAction } from '../../store/api-actions';
 import LoadingPage from '../loading-page/loading-page';
+import classNames from 'classnames';
+import NoOffers from '../../components/no-offers/no-offers';
 
 function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -27,6 +29,7 @@ function MainPage(): JSX.Element {
   }, [dispatch]);
 
   const isOffersDataLoading = useAppSelector((state) => state.allOffersDataLoadingStatus);
+  const isNoOffers = offers.length === 0;
 
   if(isOffersDataLoading) {
     return (
@@ -44,19 +47,41 @@ function MainPage(): JSX.Element {
         <title>Six Cities</title>
       </Helmet>
       <Header/>
-      <main className="page__main page__main--index">
+      <main className={classNames({
+        'page__main': true,
+        'page__main--index': true,
+        'page__main--index-empty': isNoOffers
+      })}
+      >
         <h1 className="visually-hidden">Cities</h1>
         <CitiesTabs/>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{selectedCityOffers.length} places to stay in {selectedCity}</b>
-              <SortOptions onSortTypeChange={sortTypeChangeHandler}/>
-              <OffersList offers={selectedCityOffers} type={PageType.Cities} onSelectedPinChange={setActivePointId}/>
+          <div className={
+            classNames({
+              'cities__places-container': true,
+              'container': true,
+              'cities__places-container--empty': isNoOffers
+            })
+          }
+          >
+            <section className={classNames({
+              'cities__places': !isNoOffers,
+              'places': !isNoOffers,
+              'cities__no-places': isNoOffers
+            })}
+            >
+              {
+                isNoOffers
+                  ? <NoOffers city={selectedCity}/>
+                  : <><h2 className="visually-hidden">Places</h2>
+                    <b className="places__found">{selectedCityOffers.length} places to stay in {selectedCity}</b>
+                    <SortOptions onSortTypeChange={sortTypeChangeHandler}/>
+                    <OffersList offers={selectedCityOffers} type={PageType.Cities} onSelectedPinChange={setActivePointId}/>
+                    </>
+              }
             </section>
             <div className="cities__right-section">
-              <Map points={selectedCityOffers} type={PageType.Cities} selectedPointId={activePointId}/>
+              {!isNoOffers && <Map points={selectedCityOffers} type={PageType.Cities} selectedPointId={activePointId}/>}
             </div>
           </div>
         </div>
