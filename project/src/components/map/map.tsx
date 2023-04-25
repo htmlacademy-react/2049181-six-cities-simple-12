@@ -10,6 +10,7 @@ type MapProps = {
   points: Offer[];
   type: PageType;
   selectedPointId: number;
+  offerPoint?: Offer;
 }
 
 const defaultPin = new Icon({
@@ -24,7 +25,7 @@ const selectedPin = new Icon({
   iconAnchor: [13.5, 39]
 });
 
-function Map({points, type, selectedPointId}: MapProps): JSX.Element {
+function Map({points, type, selectedPointId, offerPoint}: MapProps): JSX.Element {
   const handleLocation = ():Location => {
     if (points.length > 0) {
       return points[0].city.location;
@@ -65,9 +66,19 @@ function Map({points, type, selectedPointId}: MapProps): JSX.Element {
         marker.addTo(markersLayer);
       }
       );
+      if (offerPoint) {
+        const marker = new Marker({
+          lat: offerPoint.location.latitude,
+          lng: offerPoint.location.longitude
+        },
+        {
+          icon: selectedPin
+        });
+        marker.addTo(markersLayer);
+      }
       map.addLayer(markersLayer);
     }
-  }, [map, points, location, markersLayer, selectedPointId]);
+  }, [map, points, location, markersLayer, selectedPointId, offerPoint]);
 
   return(
     <section className={classNames({
