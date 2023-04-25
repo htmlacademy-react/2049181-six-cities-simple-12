@@ -11,7 +11,6 @@ function SortOptions({onSortTypeChange}: SortOptionsProps): JSX.Element {
   const sortingType = useRef(null);
   const [isOpened, setOpened] = useState(false);
   const [currentSortType, setCurrentSortType] = useState(SortType.Popular);
-  //TODO не очень красиво получилось с типами
   const optionsClickHandler = (evt: React.MouseEvent<HTMLElement>): void => {
     const target = evt.target as HTMLElement;
     setCurrentSortType(target.innerHTML as SortType);
