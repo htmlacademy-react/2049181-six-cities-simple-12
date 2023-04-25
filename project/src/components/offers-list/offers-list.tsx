@@ -7,14 +7,16 @@ import classNames from 'classnames';
 type OffersListProps = {
   type: PageType;
   offers: Offer[];
-  onSelectedPinChange: (id: number) => void;
+  onSelectedPinChange?: (id: number) => void;
 }
 
 function OffersList({offers, type, onSelectedPinChange}: OffersListProps): JSX.Element {
 
   const [activeOfferId, setActiveOfferId] = useState(-1);
   useEffect(() => {
-    onSelectedPinChange(activeOfferId);
+    if (onSelectedPinChange) {
+      onSelectedPinChange(activeOfferId);
+    }
   }, [activeOfferId, onSelectedPinChange]);
 
   return (
