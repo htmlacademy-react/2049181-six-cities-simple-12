@@ -9,7 +9,7 @@ import classNames from 'classnames';
 type MapProps = {
   points: Offer[];
   type: PageType;
-  selectedPointId: number;
+  selectedPointId?: number;
   offerPoint?: Offer;
 }
 

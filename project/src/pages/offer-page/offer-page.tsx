@@ -14,14 +14,13 @@ import { ClassType, PageType } from '../../const';
 import Header from '../../components/header/header';
 import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
 import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferAction } from '../../store/api-actions';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import LoadingPage from '../loading-page/loading-page';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
 import { changeCurrentOfferDataLoadingStatus } from '../../store/action';
 
 function OfferPage(): JSX.Element {
-  const [activePointId, setActivePointId] = useState(-1);
   const dispatch = useAppDispatch();
   const {id} = useParams() as {id: string};
   const nearbyOffers = useAppSelector((store) => store.nearbyOffers);
@@ -89,12 +88,12 @@ function OfferPage(): JSX.Element {
               <ReviewsList id={id}/>
             </div>
           </div>
-          <Map points={nearbyOffers} type={PageType.Near} selectedPointId={activePointId} offerPoint={offer}/>
+          <Map points={nearbyOffers} type={PageType.Near} offerPoint={offer}/>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OffersList type={PageType.Near} offers={nearbyOffers} onSelectedPinChange={setActivePointId}/>
+            <OffersList type={PageType.Near} offers={nearbyOffers}/>
           </section>
         </div>
       </main>
