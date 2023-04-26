@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import OfferGallery from '../../components/offer/gallery/gallery';
 import Mark from '../../components/offer/mark/mark';
 import Name from '../../components/offer/name/name';
@@ -12,7 +12,7 @@ import Host from '../../components/offer/host/host';
 import ReviewsList from '../../components/offer/reviews-list/reviews-list';
 import { ClassType, PageType } from '../../const';
 import Header from '../../components/header/header';
-import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import LoadingPage from '../loading-page/loading-page';

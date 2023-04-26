@@ -3,11 +3,11 @@ import { Helmet } from 'react-helmet-async';
 import { ValidationError, object, string } from 'yup';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { loginAction } from '../../store/api-actions';
 import { useNavigate } from 'react-router';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 
 function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();

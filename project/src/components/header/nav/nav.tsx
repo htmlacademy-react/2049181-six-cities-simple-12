@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../../const';
-import { useAppSelector } from '../../../hooks/useAppSelector/use-app-selector';
+import { useAppSelector } from '../../../hooks/use-app-selector/use-app-selector';
 import { dropToken } from '../../../services/token';
 
 function Nav(): JSX.Element {
