@@ -1,6 +1,6 @@
 import ReviewForm from '../review-form/review-form';
 import Review from '../review/review';
-import { useAppSelector } from '../../../hooks/useAppSelector/use-app-selector';
+import { useAppSelector } from '../../../hooks/use-app-selector/use-app-selector';
 import { AuthorizationStatus, MAX_REVIEWS_COUNT } from '../../../const';
 import { Review as ReviewType } from '../../../types/review';
 

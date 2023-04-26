@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, City } from '../../const';
-import { useAppDispatch } from '../../hooks/useAppDispatch/use-App-Dispatch';
-import { useAppSelector } from '../../hooks/useAppSelector/use-app-selector';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { changeCity } from '../../store/action';
 
 export default function CitiesTabs(): JSX.Element {

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { DEFAULT_CITY } from '../../../const';
-import { useAppDispatch } from '../../../hooks/useAppDispatch/use-App-Dispatch';
+import { useAppDispatch } from '../../../hooks/use-app-dispatch/use-app-dispatch';
 import { changeCity } from '../../../store/action';
 
 function Logo(): JSX.Element {
